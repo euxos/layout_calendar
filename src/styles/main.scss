@@ -1,3 +1,55 @@
+$month: 28, 29, 30, 31;
+$start: (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6);
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 710px;
+  margin: 60px auto;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+
+  & div {
+    display: none;
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    margin: 0 1px 1px 0;
+    background-color: #eee;
+    cursor: pointer;
+    transition: all ease-out 0.5s;
+  }
+
+  & div:hover {
+    background-color: pink;
+    margin-top: -20px;
+  }
+}
+
+@for $days from 1 through 31 {
+  .calendar div:nth-child(#{$days})::before {
+    display: flex;
+    content: "#{$days}";
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+}
+@each $month-days in $month {
+  @for $i from 1 through $month-days {
+    .calendar-#{$month-days} div:nth-child(#{$i}) {
+      display: block;
+    }
+  }
+}
+
+@each $day, $point in $start {
+  .calendar-#{$day} div:first-child {
+    margin-left: (101 * $point)+px;
+  }
 }
