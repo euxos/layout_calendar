@@ -25,7 +25,8 @@ body {
     transition: all ease-out 0.5s; }
   .calendar div:hover {
     background-color: pink;
-    margin-top: -20px; }
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px); }
   .calendar div:nth-child(1)::before {
     display: -webkit-box;
     display: -ms-flexbox;
