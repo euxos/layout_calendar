@@ -1,10 +1,10 @@
-$start: (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6);
-
 body {
   margin: 0;
 }
 
 .calendar {
+  $start: (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6);
+
   display: flex;
   flex-wrap: wrap;
   width: 710px;
@@ -28,26 +28,24 @@ body {
     background-color: pink;
     margin-top: -20px;
   }
-}
 
-@for $days from 1 through 31 {
-  .calendar div:nth-child(#{$days})::before {
-    display: flex;
-    content: "#{$days}";
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  @for $days from 1 through 31 {
+    & div:nth-child(#{$days})::before {
+      display: flex;
+      content: "#{$days}";
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    &-#{$days} div:nth-child(-n+#{$days}) {
+      display: block;
+    }
   }
-}
 
-@for $month-days from 1 through 31 {
-  .calendar-#{$month-days} div:nth-child(-n+#{$month-days}) {
-    display: block;
-  }
-}
-
-@each $day, $point in $start {
-  .calendar-#{$day} div:first-child {
-    margin-left: (101 * $point)+px;
+  @each $day, $point in $start {
+    &-#{$day} div:first-child {
+      margin-left: (101 * $point)+px;
+    }
   }
 }
